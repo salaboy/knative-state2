@@ -1,6 +1,6 @@
-module knative.dev/sample-controller
+module github.com/salaboy/knative-state2
 
-go 1.15
+go 1.16
 
 require (
 	github.com/go-openapi/spec v0.19.6 // indirect

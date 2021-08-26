@@ -26,8 +26,8 @@ readonly COMPONENTS
 function build_release() {
    # Update release labels if this is a tagged release
   if [[ -n "${TAG}" ]]; then
-    echo "Tagged release, updating release labels to samples.knative.dev/release: \"${TAG}\""
-    LABEL_YAML_CMD=(sed -e "s|samples.knative.dev/release: devel|samples.knative.dev/release: \"${TAG}\"|")
+    echo "Tagged release, updating release labels to flows.knative.dev/release: \"${TAG}\""
+    LABEL_YAML_CMD=(sed -e "s|flows.knative.dev/release: devel|flows.knative.dev/release: \"${TAG}\"|")
   else
     echo "Untagged release, will NOT update release labels"
     LABEL_YAML_CMD=(cat)
@@ -36,7 +36,7 @@ function build_release() {
   local all_yamls=()
   for yaml in "${!COMPONENTS[@]}"; do
     local config="${COMPONENTS[${yaml}]}"
-    echo "Building Knative Sample Controller - ${config}"
+    echo "Building Knative State Controller - ${config}"
     ko resolve ${KO_FLAGS} -f ${config}/ | "${LABEL_YAML_CMD[@]}" > ${yaml}
     all_yamls+=(${yaml})
   done
